@@ -1,6 +1,5 @@
 import React from "react";
 import { useAppState } from "../AppContext";
-// import { BOOKS } from "../constants";
 
 export default function BookList({ completeList }) {
   let [state, dispatch] = useAppState();

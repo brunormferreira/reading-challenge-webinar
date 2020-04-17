@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer } from "react";
-import useLocal from "./useLocal";
+// import useLocal from "./useLocal";
 import { BOOKS } from "./constants";
 
 export const AppContext = createContext();
@@ -11,15 +11,14 @@ export function useAppState() {
 const appStateReducer = (state, action) => {
   switch (action.type) {
     case "READ_BOOK": {
-
       let newToRead = state.toRead.filter((item) => {
         return item !== action.item;
       });
+      let newCompleted = state.completed.concat(action.item);
 
-      let newCompleted = state.completed.concat(action.item)
+      localStorage.setItem("to_read_list", newToRead);
+      localStorage.setItem("completed_list", newCompleted);
 
-      localStorage.setItem("to_read_list", JSON.stringify(newToRead))
-      localStorage.setItem("completed_list", JSON.stringify(newCompleted))
       return {
         ...state,
         toRead: newToRead,
@@ -47,13 +46,8 @@ const appStateReducer = (state, action) => {
   }
 };
 
-const initialState = {
-  toRead: BOOKS,
-  completed: [],
-};
-
 export function AppStateProvider({ children }) {
-  // const initialState = { toRead: BOOKS, completed: [] };
+  const initialState = { toRead: BOOKS, completed: [] };
   let cake = useReducer(appStateReducer, initialState);
 
   // useLocal();

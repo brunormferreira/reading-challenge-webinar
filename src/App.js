@@ -1,20 +1,20 @@
 import React from "react";
-import BookList from "./components/BookList";
-import Header from "./components/Header"
 import { AppStateProvider } from "./AppContext";
+import Header from "./components/Header";
+import BookList from "./components/BookList";
 import "./App.css";
 
 function App() {
   return (
-  <AppStateProvider>
-    <div className="App">
-      <Header />
-      <div className="lists">
-        <BookList />
-        <BookList completeList />
+    <AppStateProvider>
+      <div className="App">
+        <Header />
+        <div className="lists">
+          <BookList />
+          <BookList completeList />
+        </div>
       </div>
-    </div>
-  </AppStateProvider>
+    </AppStateProvider>
   );
 }
 
